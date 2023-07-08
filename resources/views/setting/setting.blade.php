@@ -29,7 +29,8 @@
                                         <label class="form-control-label">Model Ai</label>
                                         <select name="ai_model" id="ai_model" class="form-control">
                                             @foreach ($model_ai as $m)
-                                                <option value="{{ $m }}" {{ $m == $setting->ai_model ? 'selected' : '' }}>{{ $m }}</option>
+                                                <option
+                                                    value="{{ $m }}" {{ $m == $setting->ai_model ? 'selected' : '' }}>{{ $m }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -37,19 +38,23 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Temperature</label>
-                                        <input type="number" name="temperature" id="temperature" class="form-control" value="{{ $setting->temperature }}">
+                                        <input type="number" step="any" min="0" max="2" name="temperature"
+                                               id="temperature" class="form-control"
+                                               value="{{ $setting->temperature }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Max Tokens</label>
-                                        <input type="number" name="max_token" id="max_token" class="form-control" value="{{ $setting->max_tokens }}">
+                                        <input type="number" name="max_tokens" id="max_tokens" class="form-control"
+                                               value="{{ $setting->max_tokens }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">System Context</label>
-                                        <textarea name="system_context" id="system_context" cols="10" rows="10" class="form-control">{{ $setting->system_context }}</textarea>
+                                        <textarea name="system_context" id="system_context" cols="10" rows="10"
+                                                  class="form-control">{{ $setting->system_context }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +89,7 @@
                     },
                     success:function(data) {
                         $('#result').html('<div class="alert alert-success">Setting Updated</div>');
-                        
+
                         $('#submit_setting').html('Submit');
                     },
                     error: function (data) {

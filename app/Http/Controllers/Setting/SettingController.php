@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
-use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
@@ -21,7 +21,7 @@ class SettingController extends Controller
             $request,
             [
                 'temperature' => 'required',
-                'max_token' => 'required',
+                'max_tokens' => 'required',
                 'system_context' => 'required',
             ]
         );
@@ -31,7 +31,7 @@ class SettingController extends Controller
             [
                 'ai_model' => $request->ai_model,
                 'temperature' => $request->temperature,
-                'max_token' => $request->max_token,
+                'max_tokens' => $request->max_tokens,
                 'system_context' => $request->system_context
             ]
         );
