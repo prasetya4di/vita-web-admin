@@ -6,6 +6,8 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\UserAccount;
+use Hash;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -13,8 +15,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
-use App\Models\User;
-use Hash;
 use Redirect;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -52,10 +52,10 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::authenticateUsing(function (LoginRequest $request) {
-            $user = User::where('email', $request->login)
-                    ->orWhere('username', $request->login)
-                    ->first();
-  
+            $user = UserAccount::where('email', $request->login)
+                ->orWhere('username', $request->login)
+                ->first();
+
             if ($user && Hash::check($request->password, $user->password)) {
                 if ($user->status == '0') {
                     throw ValidationException::withMessages([

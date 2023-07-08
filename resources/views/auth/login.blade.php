@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Vita Admin</title>
+        <title>Vita</title>
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('img/brand/favicon.png') }}" type="image/png">
         <!-- Fonts -->
@@ -44,7 +44,7 @@
                         <div class="card bg-secondary border-0 mb-0">
                             <div class="card-body px-lg-5 py-lg-5">
                                 <div class="text-center text-muted mb-4">
-                                    Vita Admin
+                                    Vita
                                 </div>
                                 @if (count($errors) > 0)
                                 <div class="alert alert-danger" role="alert">

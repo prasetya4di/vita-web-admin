@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Actions\Fortify\CreateNewUser;
-use Laravel\Fortify\Rules\Password;
+use App\Http\Controllers\Controller;
+use App\Models\UserAccount;
+use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use DataTables;
+use Laravel\Fortify\Rules\Password;
 
 class UserController extends Controller
 {
-    public function index(Request $request) {
-        $data = User::orderBy('id', 'DESC')->where('role', 'user')->get();
+    public function index(Request $request)
+    {
+        $data = UserAccount::orderBy('id', 'DESC')->where('role', 'user')->get();
         // dd($data);
         if ($request->ajax()) {
             return Datatables::of($data)
@@ -46,7 +47,7 @@ class UserController extends Controller
                     ]
                 );
 
-                $user = User::updateOrCreate(
+                $user = UserAccount::updateOrCreate(
                     ['id' => $request->user_id],
                     [
                         'name' => $request->nama_user,
@@ -69,7 +70,7 @@ class UserController extends Controller
                     ]
                 );
 
-                $user = User::updateOrCreate(
+                $user = UserAccount::updateOrCreate(
                     ['id' => $request->user_id],
                     [
                         'name' => $request->nama_user,
@@ -85,12 +86,12 @@ class UserController extends Controller
     }
 
     public function fetchUser($id) {
-        $user = User::find($id);
+        $user = UserAccount::find($id);
         return response()->json($user);
     }
 
     public function deleteUser($id) {
-        User::find($id)->delete();
+        UserAccount::find($id)->delete();
         return response()->json(['success' => 'Data deleted successfully.']);
     }
 }
